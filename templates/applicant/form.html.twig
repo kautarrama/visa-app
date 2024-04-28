@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	New applicants
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>{{ formTitle }}</h1>
+
+		<!-- Back to Applicants Menu Button -->
+        <a href="{{ path('applicant_index') }}" class="btn btn-secondary mt-3 mb-3 right">Back to Applicants Menu</a>
+		
+		{% for message in app.flashes('error') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+		<div class="mb-3">
+			{{ form_label(form.firstname, 'First Name', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_errors(form.firstname) }}
+			{{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(form.lastname, 'Last Name', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_errors(form.lastname) }}
+			{{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(form.date_of_birth, 'Date of Birth', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_errors(form.date_of_birth) }}
+			{{ form_widget(form.date_of_birth, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="mb-3">
+			{{ form_label(form.nationality, 'Nationality', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_errors(form.nationality) }}
+			{{ form_widget(form.nationality, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}

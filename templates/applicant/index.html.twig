@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Applicants
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>Applicants</h1>
+		<a href="{{ path('applicant_new') }}" class="btn btn-primary mb-3">
+			Create New Applicant
+		</a>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		<!-- Applicants List -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Date of Birth</th>
+					<th scope="col">Nationality</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for applicant in applicants %}
+					<tr>
+						<th scope="row">{{ loop.index }}</th>
+						<td>{{ applicant.firstname }}</td>
+						<td>{{ applicant.lastname }}</td>
+						<td>{{ applicant.dateOfBirth|date('Y-m-d') }}</td>
+						<td>{{ applicant.nationality }}</td>
+						<td>
+							<a href="{{ path('applicant_edit', {'id': applicant.id}) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+							<form method="post" action="{{ path('applicant_delete', {'id': applicant.id}) }}" onsubmit="return confirm('Are you sure?')">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ applicant.id) }}">
+								<button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">No applicants found.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

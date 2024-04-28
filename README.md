@@ -1,5 +1,3 @@
-Tentu, berikut adalah contoh dasar dari file `README.md` untuk proyek Symfony Anda yang menampilkan halaman applicants sebagai halaman default:
-
 ```markdown
 # Applicant Management System
 
